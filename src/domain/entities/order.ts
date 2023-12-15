@@ -1,11 +1,8 @@
-export class Order {
-  public id: string
-  public recipientId: string
-  public deliverymanId: string
+import { Entity } from '../../core/entities/entity'
 
-  constructor(id: string, recipientId: string, deliverymanId: string) {
-    this.id = id
-    this.recipientId = recipientId
-    this.deliverymanId = deliverymanId
-  }
+interface OrderProps {
+  recipientId: string
+  deliverymanId: string
 }
+
+export class Order extends Entity<OrderProps> {}

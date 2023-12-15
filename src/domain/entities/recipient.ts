@@ -1,9 +1,7 @@
-export class Recipient {
-  public id: string
-  public name: string
+import { Entity } from '../../core/entities/entity'
 
-  constructor(id: string, name: string) {
-    this.id = id
-    this.name = name
-  }
+interface RecipientProps {
+  name: string
 }
+
+export class Recipient extends Entity<RecipientProps> {}

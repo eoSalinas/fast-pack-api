@@ -1,9 +1,7 @@
-export class Administrator {
-  public id: string
-  public name: string
+import { Entity } from '../../core/entities/entity'
 
-  constructor(id: string, name: string) {
-    this.id = id
-    this.name = name
-  }
+interface AdministratorProps {
+  name: string
 }
+
+export class Administrator extends Entity<AdministratorProps> {}

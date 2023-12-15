@@ -1,9 +1,7 @@
-export class Deliveryman {
-  public id: string
-  public name: string
+import { Entity } from '../../core/entities/entity'
 
-  constructor(id: string, name: string) {
-    this.id = id
-    this.name = name
-  }
+interface DeliverymanProps {
+  name: string
 }
+
+export class Deliveryman extends Entity<DeliverymanProps> {}
