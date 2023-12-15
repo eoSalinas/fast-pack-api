@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "keywords": [],
   "author": "",
@@ -13,6 +14,8 @@
     "@rocketseat/eslint-config": "^2.1.0",
     "@types/node": "^20.10.4",
     "eslint": "^8.55.0",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "vitest": "^1.0.4",
+    "vitest-tsconfig-paths": "^3.4.1"
   }
 }
