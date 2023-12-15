@@ -12,10 +12,14 @@
   "license": "ISC",
   "devDependencies": {
     "@rocketseat/eslint-config": "^2.1.0",
+    "@types/bcrypt": "^5.0.2",
     "@types/node": "^20.10.4",
     "eslint": "^8.55.0",
     "typescript": "^5.3.3",
     "vitest": "^1.0.4",
     "vitest-tsconfig-paths": "^3.4.1"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.1"
   }
 }
