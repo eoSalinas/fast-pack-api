@@ -6,6 +6,10 @@ interface AdministratorProps {
 }
 
 export class Administrator extends Entity<AdministratorProps> {
+  get name() {
+    return this.props.name
+  }
+
   static create(props: AdministratorProps, id?: UniqueEntityID) {
     const administrator = new Administrator(props, id)
 

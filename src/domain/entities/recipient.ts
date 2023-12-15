@@ -6,6 +6,10 @@ interface RecipientProps {
 }
 
 export class Recipient extends Entity<RecipientProps> {
+  get name() {
+    return this.props.name
+  }
+
   static create(props: RecipientProps, id?: UniqueEntityID) {
     const recipient = new Recipient(props, id)
 
