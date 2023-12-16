@@ -12,12 +12,24 @@ export class Deliveryman extends Entity<DeliverymanProps> {
     return this.props.name
   }
 
+  set name(name: string) {
+    this.props.name = name
+  }
+
   get cpf() {
     return this.props.cpf
   }
 
+  set cpf(cpf: string) {
+    this.props.cpf = cpf
+  }
+
   get password() {
     return this.props.password
+  }
+
+  set password(password: string) {
+    this.props.password = password
   }
 
   static create(props: DeliverymanProps, id?: UniqueEntityID) {
