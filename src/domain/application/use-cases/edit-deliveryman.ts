@@ -1,3 +1,4 @@
+import { Deliveryman } from '@/domain/enterprise/entities/deliveryman'
 import { DeliverymenRepository } from '../repositories/deliverymen-repository'
 
 interface EditDeliverymanUseCaseRequest {
@@ -7,7 +8,9 @@ interface EditDeliverymanUseCaseRequest {
   password: string
 }
 
-interface EditDeliverymanUseCaseReponse {}
+interface EditDeliverymanUseCaseReponse {
+  deliveryman: Deliveryman
+}
 
 export class EditDeliverymanUseCase {
   constructor(private deliverymenRepository: DeliverymenRepository) {}
@@ -30,6 +33,8 @@ export class EditDeliverymanUseCase {
 
     await this.deliverymenRepository.save(deliveryman)
 
-    return {}
+    return {
+      deliveryman,
+    }
   }
 }

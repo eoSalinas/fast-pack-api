@@ -12,17 +12,17 @@ describe('Edit Deliveryman', () => {
   })
 
   it('should be able to edit a deliveryman', async () => {
-    const deliveryman = Deliveryman.create({
+    const newDeliveryman = Deliveryman.create({
       name: 'John Doe',
       cpf: '12312312322',
       password: '123456',
     })
 
-    inMemoryDeliverymenRepository.items.push(deliveryman)
+    inMemoryDeliverymenRepository.items.push(newDeliveryman)
 
-    const deliverymanId = deliveryman.id.toString()
+    const deliverymanId = newDeliveryman.id.toString()
 
-    await sut.execute({
+    const { deliveryman } = await sut.execute({
       deliverymanId,
       name: 'Updated name',
       cpf: '12312312322',
@@ -31,6 +31,10 @@ describe('Edit Deliveryman', () => {
 
     expect(inMemoryDeliverymenRepository.items).toHaveLength(1)
     expect(inMemoryDeliverymenRepository.items[0]).toMatchObject({
+      name: 'Updated name',
+      password: 'new-password',
+    })
+    expect(deliveryman).toMatchObject({
       name: 'Updated name',
       password: 'new-password',
     })
