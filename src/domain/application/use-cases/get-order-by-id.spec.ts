@@ -28,6 +28,6 @@ describe('Get Order by Id', () => {
 
     expect(order).toEqual(newOrder)
     expect(inMemoryOrdersRepository.items).toHaveLength(1)
-    expect(inMemoryOrdersRepository.items[0].id).toBe(newOrder.id)
+    expect(inMemoryOrdersRepository.items[0].id).toBe(order.id)
   })
 })
