@@ -6,15 +6,19 @@ interface OrderProps {
   recipientId: UniqueEntityID
   deliverymanId: UniqueEntityID | null
   createdAt: Date
-  availablePickupAt?: Date
-  pickupdAt?: Date
-  deliveredAt?: Date
-  returnedAt?: Date
+  availablePickupAt?: Date | null
+  pickupdAt?: Date | null
+  deliveredAt?: Date | null
+  returnedAt?: Date | null
 }
 
 export class Order extends Entity<OrderProps> {
   get recipientId() {
     return this.props.recipientId
+  }
+
+ set recipientId(recipientId: UniqueEntityID) {
+    this.props.recipientId = recipientId
   }
 
   get deliverymanId() {
@@ -33,7 +37,7 @@ export class Order extends Entity<OrderProps> {
     return this.props.availablePickupAt
   }
 
-  set availablePickupAt(availablePickupAt: Date | undefined) {
+  set availablePickupAt(availablePickupAt: Date | undefined | null) {
     this.props.availablePickupAt = availablePickupAt
   }
 
@@ -41,7 +45,7 @@ export class Order extends Entity<OrderProps> {
     return this.props.pickupdAt
   }
 
-  set pickupdAt(pickupdAt: Date | undefined) {
+  set pickupdAt(pickupdAt: Date | undefined | null) {
     this.props.pickupdAt = pickupdAt
   }
 
@@ -49,7 +53,7 @@ export class Order extends Entity<OrderProps> {
     return this.props.deliveredAt
   }
 
-  set deliveredAt(deliveredAt: Date | undefined) {
+  set deliveredAt(deliveredAt: Date | undefined | null) {
     this.props.deliveredAt = deliveredAt
   }
 
@@ -57,7 +61,7 @@ export class Order extends Entity<OrderProps> {
     return this.props.returnedAt
   }
 
-  set returnedAt(returnedAt: Date | undefined) {
+  set returnedAt(returnedAt: Date | undefined | null) {
     this.props.returnedAt = returnedAt
   }
 
