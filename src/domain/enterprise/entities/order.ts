@@ -7,7 +7,7 @@ interface OrderProps {
   deliverymanId: UniqueEntityID | null
   createdAt: Date
   availablePickupAt?: Date
-  withdrawedAt?: Date
+  pickupdAt?: Date
   deliveredAt?: Date
   returnedAt?: Date
 }
@@ -37,12 +37,12 @@ export class Order extends Entity<OrderProps> {
     this.props.availablePickupAt = availablePickupAt
   }
 
-  get withdrawedAt() {
-    return this.props.withdrawedAt
+  get pickupdAt() {
+    return this.props.pickupdAt
   }
 
-  set withdrawedAt(withdrawedAt: Date | undefined) {
-    this.props.withdrawedAt = withdrawedAt
+  set pickupdAt(pickupdAt: Date | undefined) {
+    this.props.pickupdAt = pickupdAt
   }
 
   get deliveredAt() {
