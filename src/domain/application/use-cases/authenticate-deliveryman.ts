@@ -1,5 +1,5 @@
-import { Deliveryman } from '@/domain/enterprise/entities/deliveryman'
 import { compare } from 'bcrypt'
+import { Encrypter } from '../cryptography/encrypter'
 import { DeliverymenRepository } from '../repositories/deliverymen-repository'
 
 interface AuthenticateDeliverymanUseCaseRequest {
@@ -8,11 +8,11 @@ interface AuthenticateDeliverymanUseCaseRequest {
 }
 
 interface AuthenticateDeliverymanUseCaseReponse {
-  deliveryman: Deliveryman // TODO: should return JWT
+  accessToken: string
 }
 
 export class AuthenticateDeliverymanUseCase {
-  constructor(private deliverymenRepository: DeliverymenRepository) {}
+  constructor(private deliverymenRepository: DeliverymenRepository, private encrypter: Encrypter) {}
 
   async execute({
     cpf,
@@ -30,8 +30,10 @@ export class AuthenticateDeliverymanUseCase {
       throw new Error('Invalid credential error.')
     }
 
+    const accessToken = await this.encrypter.encrypt({ sub: deliveryman.id })
+
     return {
-      deliveryman,
+      accessToken,
     }
   }
 }
