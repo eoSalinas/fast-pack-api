@@ -20,6 +20,10 @@ export class Administrator extends Entity<AdministratorProps> {
     return this.props.password
   }
 
+  set password(password: string) {
+    this.props.password = password
+  }
+
   static create(props: AdministratorProps, id?: UniqueEntityID) {
     const administrator = new Administrator(props, id)
 
