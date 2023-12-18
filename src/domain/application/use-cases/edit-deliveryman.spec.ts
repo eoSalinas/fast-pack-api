@@ -1,5 +1,6 @@
 import { Deliveryman } from '@/domain/enterprise/entities/deliveryman'
 import { InMemoryDeliverymenRepository } from '@/domain/test/repositories/in-memory-deliverymen-repository'
+import { compare } from 'bcrypt'
 import { EditDeliverymanUseCase } from './edit-deliveryman'
 
 let inMemoryDeliverymenRepository: InMemoryDeliverymenRepository
@@ -29,14 +30,17 @@ describe('Edit Deliveryman', () => {
       password: 'new-password',
     })
 
+    const isHashedAndUpdated = await compare('new-password', deliveryman.password)
+
+    expect(isHashedAndUpdated).toBeTruthy()
     expect(inMemoryDeliverymenRepository.items).toHaveLength(1)
     expect(inMemoryDeliverymenRepository.items[0]).toMatchObject({
       name: 'Updated name',
-      password: 'new-password',
+      password: deliveryman.password,
     })
     expect(deliveryman).toMatchObject({
       name: 'Updated name',
-      password: 'new-password',
+      password: deliveryman.password,
     })
   })
 })

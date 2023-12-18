@@ -1,4 +1,5 @@
 import { Deliveryman } from '@/domain/enterprise/entities/deliveryman'
+import { hash } from 'bcrypt'
 import { DeliverymenRepository } from '../repositories/deliverymen-repository'
 
 interface EditDeliverymanUseCaseRequest {
@@ -27,9 +28,11 @@ export class EditDeliverymanUseCase {
       throw new Error('Deliveryman not found.')
     }
 
+    const hashedPassword = await hash(password, 8)
+
     deliveryman.name = name
     deliveryman.cpf = cpf
-    deliveryman.password = password
+    deliveryman.password = hashedPassword
 
     await this.deliverymenRepository.save(deliveryman)
 
