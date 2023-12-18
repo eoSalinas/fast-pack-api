@@ -4,7 +4,7 @@ import { Optional } from '@/core/types/optional'
 
 interface OrderProps {
   recipientId: UniqueEntityID
-  deliverymanId: UniqueEntityID
+  deliverymanId: UniqueEntityID | null
   createdAt: Date
   availablePickupAt?: Date
   withdrawedAt?: Date
@@ -19,6 +19,10 @@ export class Order extends Entity<OrderProps> {
 
   get deliverymanId() {
     return this.props.deliverymanId
+  }
+
+  set deliverymanId(deliverymanId: UniqueEntityID | null) {
+    this.props.deliverymanId = deliverymanId
   }
 
   get createdAt() {
