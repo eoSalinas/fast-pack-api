@@ -1,17 +1,17 @@
 import { Administrator } from '@/domain/enterprise/entities/administrator'
 import { FakeEncrypter } from '@/domain/test/cryptography/fake-encrypter'
-import { InMemoryDeliverymenRepository } from '@/domain/test/repositories/in-memory-deliverymen-repository'
+import { InMemoryAdministratorsRepository } from '@/domain/test/repositories/in-memory-administrators-repository'
 import { AuthenticateAdministratorUseCase } from './authenticate-administrator'
 
-let inMemoryDeliverymenRepository: InMemoryDeliverymenRepository
+let inMemoryAdministratorsRepository: InMemoryAdministratorsRepository
 let fakeIncrypter: FakeEncrypter
 let sut: AuthenticateAdministratorUseCase
 
 describe('Authenticate Administrator', () => {
   beforeEach(() => {
-    inMemoryDeliverymenRepository = new InMemoryDeliverymenRepository()
+    inMemoryAdministratorsRepository = new InMemoryAdministratorsRepository()
     fakeIncrypter = new FakeEncrypter()
-    sut = new AuthenticateAdministratorUseCase(inMemoryDeliverymenRepository, fakeIncrypter)
+    sut = new AuthenticateAdministratorUseCase(inMemoryAdministratorsRepository, fakeIncrypter)
   })
 
   it('should be able to authenticate a administrator', async () => {
@@ -21,7 +21,7 @@ describe('Authenticate Administrator', () => {
       password: '123456',
     })
 
-    inMemoryDeliverymenRepository.items.push(newAdministrator)
+    inMemoryAdministratorsRepository.items.push(newAdministrator)
 
     const { accessToken } = await sut.execute({
       cpf: '12312312322',
