@@ -57,4 +57,31 @@ describe('Fetch Deliveries', () => {
       ]),
     )
   })
+
+  it('should be able to fetch paginated deliveries', async () => {
+    const deliveryman = Deliveryman.create({
+      name: 'John Doe',
+      cpf: '12312312322',
+      password: '123456',
+    })
+
+    for (let i = 1; i <= 22; i++) {
+      inMemoryOrdersRepository.items.push(
+        Order.create({
+        deliverymanId: deliveryman.id,
+        recipientId: new UniqueEntityID('recipient-01'),
+        deliveredAt: new Date()
+    }))
+      
+    }
+
+    const deliverymanId = deliveryman.id.toString()
+
+    const { orders } = await sut.execute({
+      deliverymanId,
+      page: 2,
+    })
+
+    expect(orders).toHaveLength(2)
+  })
 })
