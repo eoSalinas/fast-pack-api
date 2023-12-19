@@ -1,5 +1,5 @@
-import { compare } from 'bcrypt'
 import { Encrypter } from '../cryptography/encrypter'
+import { HashComparer } from '../cryptography/hash-comparer'
 import { DeliverymenRepository } from '../repositories/deliverymen-repository'
 
 interface AuthenticateDeliverymanUseCaseRequest {
@@ -12,7 +12,11 @@ interface AuthenticateDeliverymanUseCaseReponse {
 }
 
 export class AuthenticateDeliverymanUseCase {
-  constructor(private deliverymenRepository: DeliverymenRepository, private encrypter: Encrypter) {}
+  constructor(
+    private deliverymenRepository: DeliverymenRepository,
+    private hashComparer: HashComparer,
+    private encrypter: Encrypter,
+  ) {}
 
   async execute({
     cpf,
@@ -24,7 +28,10 @@ export class AuthenticateDeliverymanUseCase {
       throw new Error('Invalid credential error.')
     }
 
-    const isPassowordValid = await compare(password, deliveryman.password)
+    const isPassowordValid = await this.hashComparer.compare(
+      password,
+      deliveryman.password,
+    )
 
     if (isPassowordValid) {
       throw new Error('Invalid credential error.')

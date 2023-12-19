@@ -1,15 +1,20 @@
+import { FakeHasher } from '@/domain/test/cryptography/fake-hasher'
 import { makeDeliveryman } from '@/domain/test/factories/make-deliveryman'
 import { InMemoryDeliverymenRepository } from '@/domain/test/repositories/in-memory-deliverymen-repository'
-import { compare } from 'bcrypt'
 import { RegisterDeliverymanUseCase } from './register-deliveryman'
 
 let inMemoryDeliverymenRepository: InMemoryDeliverymenRepository
+let fakeHasher: FakeHasher
 let sut: RegisterDeliverymanUseCase
 
 describe('Register Deliveryman', () => {
   beforeEach(() => {
     inMemoryDeliverymenRepository = new InMemoryDeliverymenRepository()
-    sut = new RegisterDeliverymanUseCase(inMemoryDeliverymenRepository)
+    fakeHasher = new FakeHasher()
+    sut = new RegisterDeliverymanUseCase(
+      inMemoryDeliverymenRepository,
+      fakeHasher,
+    )
   })
 
   it('should be able to register a deliveryman', async () => {
@@ -31,7 +36,10 @@ describe('Register Deliveryman', () => {
       password: '123456',
     })
 
-    const isPassowordHashed = await compare('123456', deliveryman.password)
+    const isPassowordHashed = await fakeHasher.compare(
+      '123456',
+      deliveryman.password,
+    )
 
     expect(isPassowordHashed).toBeTruthy()
   })
@@ -43,10 +51,12 @@ describe('Register Deliveryman', () => {
 
     inMemoryDeliverymenRepository.items.push(newDeliveryman)
 
-    await expect(() => sut.execute({
-      name: 'John Doe',
-      cpf: '12312312322',
-      password: '123456',
-    })).rejects.toBeInstanceOf(Error)
+    await expect(() =>
+      sut.execute({
+        name: 'John Doe',
+        cpf: '12312312322',
+        password: '123456',
+      }),
+    ).rejects.toBeInstanceOf(Error)
   })
 })

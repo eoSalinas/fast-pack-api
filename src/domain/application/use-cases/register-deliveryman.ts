@@ -1,5 +1,5 @@
 import { Deliveryman } from '@/domain/enterprise/entities/deliveryman'
-import { hash } from 'bcrypt'
+import { HashGenerator } from '../cryptography/hash-generator'
 import { DeliverymenRepository } from '../repositories/deliverymen-repository'
 
 interface RegisterDeliverymanUseCaseRequest {
@@ -13,7 +13,10 @@ interface RegisterDeliverymanUseCaseReponse {
 }
 
 export class RegisterDeliverymanUseCase {
-  constructor(private deliverymenRepository: DeliverymenRepository) {}
+  constructor(
+    private deliverymenRepository: DeliverymenRepository,
+    private hashGenerator: HashGenerator,
+  ) {}
 
   async execute({
     name,
@@ -27,7 +30,7 @@ export class RegisterDeliverymanUseCase {
       throw new Error('Deliveryman already exists.')
     }
 
-    const hashedPassword = await hash(password, 8)
+    const hashedPassword = await this.hashGenerator.hash(password)
 
     const deliveryman = Deliveryman.create({
       name,

@@ -1,15 +1,17 @@
+import { FakeHasher } from '@/domain/test/cryptography/fake-hasher'
 import { makeDeliveryman } from '@/domain/test/factories/make-deliveryman'
 import { InMemoryDeliverymenRepository } from '@/domain/test/repositories/in-memory-deliverymen-repository'
-import { compare } from 'bcrypt'
 import { EditDeliverymanUseCase } from './edit-deliveryman'
 
 let inMemoryDeliverymenRepository: InMemoryDeliverymenRepository
+let fakeHasher: FakeHasher
 let sut: EditDeliverymanUseCase
 
 describe('Edit Deliveryman', () => {
   beforeEach(() => {
     inMemoryDeliverymenRepository = new InMemoryDeliverymenRepository()
-    sut = new EditDeliverymanUseCase(inMemoryDeliverymenRepository)
+    fakeHasher = new FakeHasher()
+    sut = new EditDeliverymanUseCase(inMemoryDeliverymenRepository, fakeHasher)
   })
 
   it('should be able to edit a deliveryman', async () => {
@@ -26,7 +28,10 @@ describe('Edit Deliveryman', () => {
       password: 'new-password',
     })
 
-    const isHashedAndUpdated = await compare('new-password', deliveryman.password)
+    const isHashedAndUpdated = await fakeHasher.compare(
+      'new-password',
+      deliveryman.password,
+    )
 
     expect(isHashedAndUpdated).toBeTruthy()
     expect(inMemoryDeliverymenRepository.items).toHaveLength(1)

@@ -1,5 +1,5 @@
-import { compare } from 'bcrypt'
 import { Encrypter } from '../cryptography/encrypter'
+import { HashComparer } from '../cryptography/hash-comparer'
 import { AdministratorsRepository } from '../repositories/adminstrators-repository'
 
 interface AuthenticateAdministratorUseCaseRequest {
@@ -12,7 +12,11 @@ interface AuthenticateAdministratorUseCaseReponse {
 }
 
 export class AuthenticateAdministratorUseCase {
-  constructor(private administratorRepository: AdministratorsRepository, private encrypter: Encrypter) {}
+  constructor(
+    private administratorRepository: AdministratorsRepository,
+    private hashComparer: HashComparer,
+    private encrypter: Encrypter,
+  ) {}
 
   async execute({
     cpf,
@@ -24,7 +28,10 @@ export class AuthenticateAdministratorUseCase {
       throw new Error('Invalid credential error.')
     }
 
-    const isPassowordValid = await compare(password, administrator.password)
+    const isPassowordValid = await this.hashComparer.compare(
+      password,
+      administrator.password,
+    )
 
     if (isPassowordValid) {
       throw new Error('Invalid credential error.')

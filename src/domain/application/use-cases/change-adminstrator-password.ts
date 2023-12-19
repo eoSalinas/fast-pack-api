@@ -1,5 +1,5 @@
 import { Administrator } from '@/domain/enterprise/entities/administrator'
-import { hash } from 'bcrypt'
+import { HashGenerator } from '../cryptography/hash-generator'
 import { AdministratorsRepository } from '../repositories/adminstrators-repository'
 
 interface ChangeAdministratorPasswordUseCaseRequest {
@@ -12,19 +12,23 @@ interface ChangeAdministratorPasswordUseCaseReponse {
 }
 
 export class ChangeAdministratorPasswordUseCase {
-  constructor(private administratorsRepository: AdministratorsRepository) {}
+  constructor(
+    private administratorsRepository: AdministratorsRepository,
+    private hashGenerator: HashGenerator,
+  ) {}
 
   async execute({
     administratorId,
     password,
   }: ChangeAdministratorPasswordUseCaseRequest): Promise<ChangeAdministratorPasswordUseCaseReponse> {
-    const administrator = await this.administratorsRepository.findById(administratorId)
+    const administrator =
+      await this.administratorsRepository.findById(administratorId)
 
     if (!administrator) {
       throw new Error('Administrator not found.')
     }
 
-    const hashedPassword = await hash(password, 8)
+    const hashedPassword = await this.hashGenerator.hash(password)
 
     administrator.password = hashedPassword
 
