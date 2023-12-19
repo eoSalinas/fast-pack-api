@@ -1,4 +1,4 @@
-import { Deliveryman } from '@/domain/enterprise/entities/deliveryman'
+import { makeDeliveryman } from '@/domain/test/factories/make-deliveryman'
 import { InMemoryDeliverymenRepository } from '@/domain/test/repositories/in-memory-deliverymen-repository'
 import { compare } from 'bcrypt'
 import { EditDeliverymanUseCase } from './edit-deliveryman'
@@ -13,11 +13,7 @@ describe('Edit Deliveryman', () => {
   })
 
   it('should be able to edit a deliveryman', async () => {
-    const newDeliveryman = Deliveryman.create({
-      name: 'John Doe',
-      cpf: '12312312322',
-      password: '123456',
-    })
+    const newDeliveryman = makeDeliveryman()
 
     inMemoryDeliverymenRepository.items.push(newDeliveryman)
 
@@ -26,7 +22,7 @@ describe('Edit Deliveryman', () => {
     const { deliveryman } = await sut.execute({
       deliverymanId,
       name: 'Updated name',
-      cpf: '12312312322',
+      cpf: newDeliveryman.cpf,
       password: 'new-password',
     })
 

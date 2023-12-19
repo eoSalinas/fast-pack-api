@@ -1,4 +1,4 @@
-import { Deliveryman } from '@/domain/enterprise/entities/deliveryman'
+import { makeDeliveryman } from '@/domain/test/factories/make-deliveryman'
 import { InMemoryDeliverymenRepository } from '@/domain/test/repositories/in-memory-deliverymen-repository'
 import { DeleteDeliverymanUseCase } from './delete-deliveryman'
 
@@ -12,11 +12,7 @@ describe('Delete Deliveryman', () => {
   })
 
   it('should be able to delete a deliveryman', async () => {
-    const deliveryman = Deliveryman.create({
-      name: 'John Doe',
-      cpf: '12312312322',
-      password: '123456',
-    })
+    const deliveryman = makeDeliveryman()
 
     inMemoryDeliverymenRepository.items.push(deliveryman)
 

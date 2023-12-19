@@ -1,4 +1,4 @@
-import { Administrator } from '@/domain/enterprise/entities/administrator'
+import { makeAdministrator } from '@/domain/test/factories/make-administrator'
 import { InMemoryAdministratorsRepository } from '@/domain/test/repositories/in-memory-administrators-repository'
 import { compare } from 'bcrypt'
 import { ChangeAdministratorPasswordUseCase } from './change-adminstrator-password'
@@ -13,11 +13,7 @@ describe('Change Administrator Password', () => {
   })
 
   it('should be able to change administrator password', async () => {
-    const newAdministrator = Administrator.create({
-      name: 'John Doe',
-      cpf: '12312312322',
-      password: '123456',
-    })
+    const newAdministrator = makeAdministrator()
 
     inMemoryAdministratorsRepository.items.push(newAdministrator)
 

@@ -1,5 +1,5 @@
-import { Deliveryman } from '@/domain/enterprise/entities/deliveryman'
 import { FakeEncrypter } from '@/domain/test/cryptography/fake-encrypter'
+import { makeDeliveryman } from '@/domain/test/factories/make-deliveryman'
 import { InMemoryDeliverymenRepository } from '@/domain/test/repositories/in-memory-deliverymen-repository'
 import { AuthenticateDeliverymanUseCase } from './authenticate-deliveryman'
 
@@ -15,8 +15,7 @@ describe('Authenticate Deliveryman', () => {
   })
 
   it('should be able to authenticate a deliveryman', async () => {
-    const newDeliveryman = Deliveryman.create({
-      name: 'John Doe',
+    const newDeliveryman = makeDeliveryman({
       cpf: '12312312322',
       password: '123456',
     })

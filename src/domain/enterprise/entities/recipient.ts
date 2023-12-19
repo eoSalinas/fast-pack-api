@@ -1,7 +1,7 @@
 import { Entity } from '@/core/entities/entity'
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 
-interface RecipientProps {
+export interface RecipientProps {
   name: string
   cpf: string
 }

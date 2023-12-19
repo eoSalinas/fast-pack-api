@@ -1,4 +1,4 @@
-import { Recipient } from '@/domain/enterprise/entities/recipient'
+import { makeRecipient } from '@/domain/test/factories/make-recipient'
 import { InMemoryRecipientsRepository } from '@/domain/test/repositories/in-memory-recipients-repository'
 import { DeleteRecipientUseCase } from './delete-recipient'
 
@@ -12,10 +12,7 @@ describe('Delete Recipient', () => {
   })
 
   it('should be able to delete a recipient', async () => {
-    const recipient = Recipient.create({
-      name: 'John Doe',
-      cpf: '12312312322',
-    })
+    const recipient = makeRecipient()
 
     inMemoryRecipientsRepository.items.push(recipient)
 

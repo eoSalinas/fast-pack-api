@@ -1,6 +1,6 @@
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
-import { Deliveryman } from '@/domain/enterprise/entities/deliveryman'
-import { Order } from '@/domain/enterprise/entities/order'
+import { makeDeliveryman } from '@/domain/test/factories/make-deliveryman'
+import { makeOrder } from '@/domain/test/factories/make-order'
 import { InMemoryOrdersRepository } from '@/domain/test/repositories/in-memory-orders-repository'
 import { FetchDeliveriesUseCase } from './fetch-deliveries'
 
@@ -14,25 +14,21 @@ describe('Fetch Deliveries', () => {
   })
 
   it('should be able to fetch deliveries by deliveryman id', async () => {
-    const deliveryman = Deliveryman.create({
-      name: 'John Doe',
-      cpf: '12312312322',
-      password: '123456',
-    })
+    const deliveryman = makeDeliveryman()
 
-    const order1 = Order.create({
+    const order1 = makeOrder({
       deliverymanId: deliveryman.id,
       recipientId: new UniqueEntityID('recipient-01'),
       deliveredAt: new Date()
     })
 
-    const order2 = Order.create({
+    const order2 = makeOrder({
       deliverymanId: deliveryman.id,
       recipientId: new UniqueEntityID('recipient-01'),
       deliveredAt: null
     })
 
-    const order3 = Order.create({
+    const order3 = makeOrder({
       deliverymanId: deliveryman.id,
       recipientId: new UniqueEntityID('recipient-03'),
       deliveredAt: new Date()
@@ -59,20 +55,15 @@ describe('Fetch Deliveries', () => {
   })
 
   it('should be able to fetch paginated deliveries', async () => {
-    const deliveryman = Deliveryman.create({
-      name: 'John Doe',
-      cpf: '12312312322',
-      password: '123456',
-    })
+    const deliveryman = makeDeliveryman()
 
     for (let i = 1; i <= 22; i++) {
       inMemoryOrdersRepository.items.push(
-        Order.create({
+        makeOrder({
         deliverymanId: deliveryman.id,
         recipientId: new UniqueEntityID('recipient-01'),
         deliveredAt: new Date()
-    }))
-      
+      }))
     }
 
     const deliverymanId = deliveryman.id.toString()

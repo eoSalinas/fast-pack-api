@@ -1,5 +1,4 @@
-import { UniqueEntityID } from '@/core/entities/unique-entity-id'
-import { Order } from '@/domain/enterprise/entities/order'
+import { makeOrder } from '@/domain/test/factories/make-order'
 import { InMemoryOrdersRepository } from '@/domain/test/repositories/in-memory-orders-repository'
 import { GetOrderByIdUseCase } from './get-order-by-id'
 
@@ -13,10 +12,7 @@ describe('Get Order by Id', () => {
   })
 
   it('should be able to get a order by id', async () => {
-    const newOrder = Order.create({
-      deliverymanId: new UniqueEntityID('deliveryman-1'),
-      recipientId: new UniqueEntityID('recipient-1'),
-    })
+    const newOrder = makeOrder()
 
     inMemoryOrdersRepository.items.push(newOrder)
 

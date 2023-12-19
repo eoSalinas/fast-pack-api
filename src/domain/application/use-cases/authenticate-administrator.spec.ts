@@ -1,5 +1,5 @@
-import { Administrator } from '@/domain/enterprise/entities/administrator'
 import { FakeEncrypter } from '@/domain/test/cryptography/fake-encrypter'
+import { makeAdministrator } from '@/domain/test/factories/make-administrator'
 import { InMemoryAdministratorsRepository } from '@/domain/test/repositories/in-memory-administrators-repository'
 import { AuthenticateAdministratorUseCase } from './authenticate-administrator'
 
@@ -15,8 +15,7 @@ describe('Authenticate Administrator', () => {
   })
 
   it('should be able to authenticate a administrator', async () => {
-    const newAdministrator = Administrator.create({
-      name: 'John Doe',
+    const newAdministrator = makeAdministrator({
       cpf: '12312312322',
       password: '123456',
     })

@@ -1,5 +1,4 @@
-import { UniqueEntityID } from '@/core/entities/unique-entity-id'
-import { Order } from '@/domain/enterprise/entities/order'
+import { makeOrder } from '@/domain/test/factories/make-order'
 import { InMemoryOrdersRepository } from '@/domain/test/repositories/in-memory-orders-repository'
 import { PickupOrderUseCase } from './pickup-order'
 
@@ -13,10 +12,7 @@ describe('Pickup Order', () => {
   })
 
   it('should be able to pickup an order', async () => {
-    const newOrder = Order.create({
-      recipientId: new UniqueEntityID('recipient-01'),
-      deliverymanId: new UniqueEntityID('deliveryman-01'),
-    })
+    const newOrder = makeOrder()
 
     inMemoryOrdersRepository.items.push(newOrder)
 

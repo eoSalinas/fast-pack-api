@@ -1,7 +1,7 @@
 import { Entity } from '@/core/entities/entity'
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 
-interface AdministratorProps {
+export interface AdministratorProps {
   name: string
   cpf: string
   password: string

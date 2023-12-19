@@ -1,4 +1,4 @@
-import { Recipient } from '@/domain/enterprise/entities/recipient'
+import { makeRecipient } from '@/domain/test/factories/make-recipient'
 import { InMemoryRecipientsRepository } from '@/domain/test/repositories/in-memory-recipients-repository'
 import { GetRecipientByIdUseCase } from './get-recipient-by-id'
 
@@ -12,10 +12,7 @@ describe('Get Recipient by Id', () => {
   })
 
   it('should be able to get a recipient by id', async () => {
-    const newRecipient = Recipient.create({
-      name: 'John Doe',
-      cpf: '12312312322',
-    })
+    const newRecipient = makeRecipient()
 
     inMemoryRecipientsRepository.items.push(newRecipient)
 

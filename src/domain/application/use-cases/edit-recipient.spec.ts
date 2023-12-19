@@ -1,4 +1,4 @@
-import { Recipient } from '@/domain/enterprise/entities/recipient'
+import { makeRecipient } from '@/domain/test/factories/make-recipient'
 import { InMemoryRecipientsRepository } from '@/domain/test/repositories/in-memory-recipients-repository'
 import { EditRecipientUseCase } from './edit-recipient'
 
@@ -12,10 +12,7 @@ describe('Edit Recipient', () => {
   })
 
   it('should be able to edit a recipient', async () => {
-    const newRecipient = Recipient.create({
-      name: 'John Doe',
-      cpf: '12312312322'
-    })
+    const newRecipient = makeRecipient()
 
     inMemoryRecipientsRepository.items.push(newRecipient)
 
@@ -24,12 +21,11 @@ describe('Edit Recipient', () => {
     const { recipient } = await sut.execute({
       recipientId,
       name: 'New Name',
-      cpf: '12312312322',
+      cpf: newRecipient.cpf,
     })
 
     expect(recipient).toEqual(expect.objectContaining({
       name: 'New Name',
-      cpf: '12312312322',
     }))
   })
 })
