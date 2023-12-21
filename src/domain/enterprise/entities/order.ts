@@ -10,6 +10,8 @@ export interface OrderProps {
   pickupdAt?: Date | null
   deliveredAt?: Date | null
   returnedAt?: Date | null
+  latitude: number
+  longitude: number
 }
 
 export class Order extends Entity<OrderProps> {
@@ -17,7 +19,7 @@ export class Order extends Entity<OrderProps> {
     return this.props.recipientId
   }
 
- set recipientId(recipientId: UniqueEntityID) {
+  set recipientId(recipientId: UniqueEntityID) {
     this.props.recipientId = recipientId
   }
 
@@ -63,6 +65,14 @@ export class Order extends Entity<OrderProps> {
 
   set returnedAt(returnedAt: Date | undefined | null) {
     this.props.returnedAt = returnedAt
+  }
+
+  get latitude() {
+    return this.props.latitude
+  }
+
+  get longitude() {
+    return this.props.longitude
   }
 
   static create(props: Optional<OrderProps, 'createdAt'>, id?: UniqueEntityID) {
