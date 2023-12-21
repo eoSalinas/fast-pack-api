@@ -15,9 +15,13 @@ export class FetchDeliveriesUseCase {
 
   async execute({
     deliverymanId,
-    page
+    page,
   }: FetchDeliveriesUseCaseRequest): Promise<FetchDeliveriesUseCaseReponse> {
-    const orders = await this.ordersRepository.findManyDeliveriesByDeliverymanId(deliverymanId, { page })
+    const orders =
+      await this.ordersRepository.findManyDeliveriesByDeliverymanId(
+        deliverymanId,
+        { page },
+      )
 
     return {
       orders,

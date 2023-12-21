@@ -1,7 +1,9 @@
-import { AdministratorsRepository } from "@/domain/application/repositories/adminstrators-repository";
-import { Administrator } from "@/domain/enterprise/entities/administrator";
+import { AdministratorsRepository } from '@/domain/application/repositories/adminstrators-repository'
+import { Administrator } from '@/domain/enterprise/entities/administrator'
 
-export class InMemoryAdministratorsRepository implements AdministratorsRepository {
+export class InMemoryAdministratorsRepository
+  implements AdministratorsRepository
+{
   public items: Administrator[] = []
 
   async findById(id: string): Promise<Administrator | null> {
@@ -25,7 +27,9 @@ export class InMemoryAdministratorsRepository implements AdministratorsRepositor
   }
 
   async save(administrator: Administrator): Promise<void> {
-    const itemIndex = this.items.findIndex((item) => administrator.id === item.id)
+    const itemIndex = this.items.findIndex(
+      (item) => administrator.id === item.id,
+    )
 
     this.items[itemIndex] = administrator
   }

@@ -19,19 +19,19 @@ describe('Fetch Deliveries', () => {
     const order1 = makeOrder({
       deliverymanId: deliveryman.id,
       recipientId: new UniqueEntityID('recipient-01'),
-      deliveredAt: new Date()
+      deliveredAt: new Date(),
     })
 
     const order2 = makeOrder({
       deliverymanId: deliveryman.id,
       recipientId: new UniqueEntityID('recipient-01'),
-      deliveredAt: null
+      deliveredAt: null,
     })
 
     const order3 = makeOrder({
       deliverymanId: deliveryman.id,
       recipientId: new UniqueEntityID('recipient-03'),
-      deliveredAt: new Date()
+      deliveredAt: new Date(),
     })
 
     inMemoryOrdersRepository.items.push(order1)
@@ -46,10 +46,18 @@ describe('Fetch Deliveries', () => {
     })
 
     expect(orders).toHaveLength(2)
-     expect(orders).toEqual(
+    expect(orders).toEqual(
       expect.arrayContaining([
-        expect.objectContaining({ id: order1.id, deliverymanId: deliveryman.id, deliveredAt: expect.any(Date) }),
-        expect.objectContaining({ id: order3.id, deliverymanId: deliveryman.id, deliveredAt: expect.any(Date) }),
+        expect.objectContaining({
+          id: order1.id,
+          deliverymanId: deliveryman.id,
+          deliveredAt: expect.any(Date),
+        }),
+        expect.objectContaining({
+          id: order3.id,
+          deliverymanId: deliveryman.id,
+          deliveredAt: expect.any(Date),
+        }),
       ]),
     )
   })
@@ -60,10 +68,11 @@ describe('Fetch Deliveries', () => {
     for (let i = 1; i <= 22; i++) {
       inMemoryOrdersRepository.items.push(
         makeOrder({
-        deliverymanId: deliveryman.id,
-        recipientId: new UniqueEntityID('recipient-01'),
-        deliveredAt: new Date()
-      }))
+          deliverymanId: deliveryman.id,
+          recipientId: new UniqueEntityID('recipient-01'),
+          deliveredAt: new Date(),
+        }),
+      )
     }
 
     const deliverymanId = deliveryman.id.toString()

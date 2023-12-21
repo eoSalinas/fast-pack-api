@@ -24,8 +24,10 @@ describe('Edit Recipient', () => {
       cpf: newRecipient.cpf,
     })
 
-    expect(recipient).toEqual(expect.objectContaining({
-      name: 'New Name',
-    }))
+    expect(recipient).toEqual(
+      expect.objectContaining({
+        name: 'New Name',
+      }),
+    )
   })
 })
