@@ -71,8 +71,16 @@ export class Order extends Entity<OrderProps> {
     return this.props.latitude
   }
 
+  set latitude(latitude: number) {
+    this.props.latitude = latitude
+  }
+
   get longitude() {
     return this.props.longitude
+  }
+
+  set longitude(longitude: number) {
+    this.props.longitude = longitude
   }
 
   static create(props: Optional<OrderProps, 'createdAt'>, id?: UniqueEntityID) {

@@ -14,6 +14,8 @@ describe('Create Order', () => {
     const { order } = await sut.execute({
       recipientId: 'recipient-1',
       deliverymanId: 'deliveryman-1',
+      latitude: -23.984224,
+      longitude: -46.200421,
     })
 
     expect(order.id).toBeTruthy()

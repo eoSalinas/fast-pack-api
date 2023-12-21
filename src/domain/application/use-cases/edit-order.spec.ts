@@ -30,17 +30,23 @@ describe('Edit Order', () => {
       pickupdAt: null,
       deliveredAt: null,
       returnedAt: null,
+      latitude: -23.984224,
+      longitude: -46.200421,
     })
 
-    expect(inMemoryOrdersRepository.items[0]).toEqual(expect.objectContaining({
-      deliverymanId: new UniqueEntityID('deliveryman-02'),
-      availablePickupAt: expect.any(Date),
-      pickupdAt: null
-    }))
-    expect(order).toEqual(expect.objectContaining({
-      deliverymanId: new UniqueEntityID('deliveryman-02'),
-      availablePickupAt: expect.any(Date),
-      pickupdAt: null
-    }))
+    expect(inMemoryOrdersRepository.items[0]).toEqual(
+      expect.objectContaining({
+        deliverymanId: new UniqueEntityID('deliveryman-02'),
+        availablePickupAt: expect.any(Date),
+        pickupdAt: null,
+      }),
+    )
+    expect(order).toEqual(
+      expect.objectContaining({
+        deliverymanId: new UniqueEntityID('deliveryman-02'),
+        availablePickupAt: expect.any(Date),
+        pickupdAt: null,
+      }),
+    )
   })
 })

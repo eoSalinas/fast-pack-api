@@ -10,6 +10,8 @@ interface EditOrderUseCaseRequest {
   pickupdAt: Date | null
   deliveredAt: Date | null
   returnedAt: Date | null
+  latitude: number
+  longitude: number
 }
 
 interface EditOrderUseCaseReponse {
@@ -27,6 +29,8 @@ export class EditOrderUseCase {
     pickupdAt,
     deliveredAt,
     returnedAt,
+    latitude,
+    longitude,
   }: EditOrderUseCaseRequest): Promise<EditOrderUseCaseReponse> {
     const order = await this.ordersDelivery.findById(orderId)
 
@@ -40,6 +44,8 @@ export class EditOrderUseCase {
     order.pickupdAt = pickupdAt
     order.deliveredAt = deliveredAt
     order.returnedAt = returnedAt
+    order.latitude = latitude
+    order.longitude = longitude
 
     await this.ordersDelivery.save(order)
 
