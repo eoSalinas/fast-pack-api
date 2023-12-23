@@ -1,5 +1,5 @@
-import { makeDeliveryman } from '@/domain/test/factories/make-deliveryman'
-import { InMemoryDeliverymenRepository } from '@/domain/test/repositories/in-memory-deliverymen-repository'
+import { makeDeliveryman } from 'test/factories/make-deliveryman'
+import { InMemoryDeliverymenRepository } from 'test/repositories/in-memory-deliverymen-repository'
 import { GetDeliverymanByIdUseCase } from './get-deliveryman-by-id'
 
 let inMemoryDeliverymenRepository: InMemoryDeliverymenRepository

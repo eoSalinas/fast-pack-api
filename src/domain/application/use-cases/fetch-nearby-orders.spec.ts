@@ -1,7 +1,7 @@
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
-import { makeDeliveryman } from '@/domain/test/factories/make-deliveryman'
-import { makeOrder } from '@/domain/test/factories/make-order'
-import { InMemoryOrdersRepository } from '@/domain/test/repositories/in-memory-orders-repository'
+import { makeDeliveryman } from 'test/factories/make-deliveryman'
+import { makeOrder } from 'test/factories/make-order'
+import { InMemoryOrdersRepository } from 'test/repositories/in-memory-orders-repository'
 import { FetchNearbyOrdersUseCase } from './fetch-nearby-orders'
 
 let inMemoryOrdersRepository: InMemoryOrdersRepository

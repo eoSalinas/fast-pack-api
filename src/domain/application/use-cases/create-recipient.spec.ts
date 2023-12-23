@@ -1,4 +1,4 @@
-import { InMemoryRecipientsRepository } from '@/domain/test/repositories/in-memory-recipients-repository'
+import { InMemoryRecipientsRepository } from 'test/repositories/in-memory-recipients-repository'
 import { CreateRecipientUseCase } from './create-recipient'
 
 let inMemoryRecipientsRepository: InMemoryRecipientsRepository

@@ -1,5 +1,5 @@
-import { makeRecipient } from '@/domain/test/factories/make-recipient'
-import { InMemoryRecipientsRepository } from '@/domain/test/repositories/in-memory-recipients-repository'
+import { makeRecipient } from 'test/factories/make-recipient'
+import { InMemoryRecipientsRepository } from 'test/repositories/in-memory-recipients-repository'
 import { EditRecipientUseCase } from './edit-recipient'
 
 let inMemoryRecipientsRepository: InMemoryRecipientsRepository

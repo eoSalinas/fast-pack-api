@@ -1,6 +1,6 @@
-import { FakeHasher } from '@/domain/test/cryptography/fake-hasher'
-import { makeAdministrator } from '@/domain/test/factories/make-administrator'
-import { InMemoryAdministratorsRepository } from '@/domain/test/repositories/in-memory-administrators-repository'
+import { FakeHasher } from 'test/cryptography/fake-hasher'
+import { makeAdministrator } from 'test/factories/make-administrator'
+import { InMemoryAdministratorsRepository } from 'test/repositories/in-memory-administrators-repository'
 import { ChangeAdministratorPasswordUseCase } from './change-adminstrator-password'
 
 let inMemoryAdministratorsRepository: InMemoryAdministratorsRepository

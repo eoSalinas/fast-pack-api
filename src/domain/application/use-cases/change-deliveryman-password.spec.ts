@@ -1,6 +1,6 @@
-import { FakeHasher } from '@/domain/test/cryptography/fake-hasher'
-import { makeDeliveryman } from '@/domain/test/factories/make-deliveryman'
-import { InMemoryDeliverymenRepository } from '@/domain/test/repositories/in-memory-deliverymen-repository'
+import { FakeHasher } from 'test/cryptography/fake-hasher'
+import { makeDeliveryman } from 'test/factories/make-deliveryman'
+import { InMemoryDeliverymenRepository } from 'test/repositories/in-memory-deliverymen-repository'
 import { ChangeDeliverymanPasswordUseCase } from './change-deliveryman-password'
 
 let inMemoryDeliverymenRepository: InMemoryDeliverymenRepository

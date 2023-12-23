@@ -1,5 +1,5 @@
-import { makeOrder } from '@/domain/test/factories/make-order'
-import { InMemoryOrdersRepository } from '@/domain/test/repositories/in-memory-orders-repository'
+import { makeOrder } from 'test/factories/make-order'
+import { InMemoryOrdersRepository } from 'test/repositories/in-memory-orders-repository'
 import { PickupOrderUseCase } from './pickup-order'
 
 let inMemoryOrdersRepository: InMemoryOrdersRepository

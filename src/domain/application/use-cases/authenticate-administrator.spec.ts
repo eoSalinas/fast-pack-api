@@ -1,7 +1,7 @@
-import { FakeEncrypter } from '@/domain/test/cryptography/fake-encrypter'
-import { FakeHasher } from '@/domain/test/cryptography/fake-hasher'
-import { makeAdministrator } from '@/domain/test/factories/make-administrator'
-import { InMemoryAdministratorsRepository } from '@/domain/test/repositories/in-memory-administrators-repository'
+import { FakeEncrypter } from 'test/cryptography/fake-encrypter'
+import { FakeHasher } from 'test/cryptography/fake-hasher'
+import { makeAdministrator } from 'test/factories/make-administrator'
+import { InMemoryAdministratorsRepository } from 'test/repositories/in-memory-administrators-repository'
 import { AuthenticateAdministratorUseCase } from './authenticate-administrator'
 
 let inMemoryAdministratorsRepository: InMemoryAdministratorsRepository
