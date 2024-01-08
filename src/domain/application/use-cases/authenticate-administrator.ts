@@ -1,15 +1,20 @@
+import { Either, left, right } from '@/core/either'
 import { Encrypter } from '../cryptography/encrypter'
 import { HashComparer } from '../cryptography/hash-comparer'
 import { AdministratorsRepository } from '../repositories/adminstrators-repository'
+import { WrongCredentialsError } from './errors/wrong-credentials-error'
 
 interface AuthenticateAdministratorUseCaseRequest {
   cpf: string
   password: string
 }
 
-interface AuthenticateAdministratorUseCaseReponse {
-  accessToken: string
-}
+type AuthenticateAdministratorUseCaseReponse = Either<
+  WrongCredentialsError,
+  {
+    accessToken: string
+  }
+>
 
 export class AuthenticateAdministratorUseCase {
   constructor(
@@ -25,7 +30,7 @@ export class AuthenticateAdministratorUseCase {
     const administrator = await this.administratorRepository.findByCPF(cpf)
 
     if (!administrator) {
-      throw new Error('Invalid credential error.')
+      return left(new WrongCredentialsError())
     }
 
     const isPassowordValid = await this.hashComparer.compare(
@@ -34,13 +39,13 @@ export class AuthenticateAdministratorUseCase {
     )
 
     if (isPassowordValid) {
-      throw new Error('Invalid credential error.')
+      return left(new WrongCredentialsError())
     }
 
     const accessToken = await this.encrypter.encrypt({ sub: administrator.id })
 
-    return {
+    return right({
       accessToken,
-    }
+    })
   }
 }

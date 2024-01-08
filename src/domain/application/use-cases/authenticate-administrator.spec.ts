@@ -29,11 +29,14 @@ describe('Authenticate Administrator', () => {
 
     inMemoryAdministratorsRepository.items.push(newAdministrator)
 
-    const { accessToken } = await sut.execute({
+    const result = await sut.execute({
       cpf: '12312312322',
       password: '123456',
     })
 
-    expect(accessToken).toEqual(expect.any(String))
+    expect(result.isRight()).toBe(true)
+    expect(result.value).toEqual({
+      accessToken: expect.any(String),
+    })
   })
 })
